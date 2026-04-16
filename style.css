@@ -84,19 +84,16 @@ a {
   margin: 0 auto;
 }
 
-/* 🔧 FIX FOTO PROFIL */
 .avatar {
   width: 112px;
   height: 112px;
   border-radius: 50%;
   border: 1.5px solid var(--accent);
   margin-bottom: 32px;
-
   object-fit: cover;
-  object-position: 50% 20%; /* 🔥 INI KUNCINYA */
+  object-position: 50% 20%;
   display: block;
 }
-
 
 .hero h1 {
   font-size: 2.6rem;
@@ -144,12 +141,18 @@ a {
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 32px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.project:hover {
+  transform: translateY(-4px);
 }
 
 .project-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
   margin-bottom: 12px;
 }
@@ -182,7 +185,76 @@ a {
   margin-bottom: 6px;
 }
 
-/* 🔧 FIX SKILLS ICON */
+/* HEADER RIGHT */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ARROW */
+.arrow {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(45deg);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  display: inline-block;
+}
+
+.project.active .arrow {
+  transform: rotate(-135deg);
+  border-color: var(--accent);
+}
+
+/* DROPDOWN */
+.project-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.project.active .project-dropdown {
+  max-height: 2000px; /* 🔥 biar nggak kepotong */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================== */
+/* 🔥 SLIDER FIX (INI KUNCI) */
+/* ===================== */
+
+.slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-top: 16px;
+  cursor: grab;
+
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.slider img {
+  width: 100%;
+  max-width: 320px; /* biar tetap proporsional */
+  flex-shrink: 0;
+
+  border-radius: 12px;
+  border: 1px solid var(--border);
+
+  scroll-snap-align: start;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* SKILLS */
 .skills-icons {
   display: flex;
   flex-wrap: wrap;
@@ -192,13 +264,10 @@ a {
 .skills-icons img {
   width: 36px;
   height: 36px;
-
-  object-fit: contain;      /* FIX ICON MELEBAR */
-  object-position: center;
-
+  object-fit: contain;
   opacity: 0.55;
   filter: grayscale(100%);
-  transition: opacity .2s ease, filter .2s ease;
+  transition: 0.2s;
 }
 
 .skills-icons img:hover {
@@ -227,12 +296,8 @@ a {
   color: var(--text-muted);
 }
 
-/* ===================== */
-/* RESPONSIVE (WAJIB) */
-/* ===================== */
-
+/* RESPONSIVE */
 @media (max-width: 768px) {
-
   .hero {
     padding: 96px 20px 80px;
   }
@@ -246,12 +311,11 @@ a {
   }
 
   .nav-links {
-    display: none; /* simple & clean mobile */
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
-
   .hero h1 {
     font-size: 1.9rem;
   }
@@ -264,4 +328,72 @@ a {
   .project {
     padding: 24px;
   }
+}
+
+/* ===================== */
+/* 🔥 SLIDER FINAL FIX */
+/* ===================== */
+
+.slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-top: 16px;
+  cursor: grab;
+
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  justify-content: flex-start;
+}
+
+/* AUTO CENTER kalau cuma 1 gambar */
+.slider:has(img:only-child) {
+  justify-content: center;
+}
+
+.slider img {
+  width: 100%;
+  max-width: 320px;
+  flex-shrink: 0;
+
+  border-radius: 12px;
+  border: 1px solid var(--border);
+
+  scroll-snap-align: start;
+}
+
+.slider-wrapper {
+  position: relative;
+}
+
+/* BUTTON FIX */
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+  z-index: 3;
+  font-size: 20px;
+}
+
+/* 🔥 FIX POSISI */
+.slide-btn.left {
+  left: 8px;
+}
+
+.slide-btn.right {
+  right: 8px;
+}
+
+.slide-btn:hover {
+  background: var(--accent);
+  color: white;
 }
