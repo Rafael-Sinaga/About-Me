@@ -131,6 +131,7 @@ a {
 
 /* PROJECTS */
 .project-list {
+  align-items: start;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 32px;
@@ -394,6 +395,32 @@ a {
 }
 
 .slide-btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.project-extra {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.project-links {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.project-links a {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: 0.2s;
+}
+
+.project-links a:hover {
   background: var(--accent);
   color: white;
 }
